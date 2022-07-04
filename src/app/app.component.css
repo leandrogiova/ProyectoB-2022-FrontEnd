@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+El class se puede utilizar reiteradas veces y en css se inicializa con el .
+*/
+
+.titulo1 {
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    font-family: "Satisfy", cursive;
+    font-size: 40px;
+    font-style: oblique;
+    font-stretch: extra-expanded;
+    color: rgb(255, 255, 255); /* color de la letra*/
+}
+
+
+.menu1{
+    color: #00144a;
+    background-color: #3b4152;;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: 20px;
+
+}
+
+.boton1 {   /* Botones del menu (Menu, Carta, Tragos, Quienes Somos, Contactenos) */
+    font-family: "Satisfy", cursive;
+    font-size: 20px;
+    font-style: oblique;
+    font-stretch: extra-expanded;
+    color: rgb(255, 255, 255); /* color de la letra*/
+    background-color: #2e2c2c; /*FONDO*/
+
+    border-color:#2e2c2c;
+    /*    border: none;*/
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+
+
+.resaltador:hover{
+    border-bottom-color: red;
+}
+
+
+/*
+https://www.mclibre.org/consultar/amaya/css/css-propiedades.html#css-fondos
+
+El id es unico y en css se inicializa con el #
+
+
+La clase se puede re utilizar y en css se inicializa con el . 
+*/
+#espacioBotonHome { /* boton "Home" */
+    margin-left: 10%;
+}
+
+#espacioBotonMibar{
+    margin-right: 10%;
+}
+
+#page{
+    margin: center;
+    height: auto;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+#botonespecialMibar {
+    font-family: "Satisfy", cursive;
+    font-size: 20px;
+    color: #ffffff; /* color de la letra*/
+    border: none;
+    margin-left: 10%;
+    background-color: #2e2c2ce3;
+}
+
+#botonespecialHome {
+    font-family: "Satisfy", cursive;
+    font-size: 20px;
+    color: #ffffff; /* color de la letra*/
+    margin-left: 70%;
+    margin: center;
+    border: none;
+    background-color: #2e2c2ce3;
+}
+
+.letrablanca{
+    color: white;
+}

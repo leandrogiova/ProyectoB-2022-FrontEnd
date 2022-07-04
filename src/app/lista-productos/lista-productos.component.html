@@ -1,0 +1,14 @@
+<h2> COMPONENTE PRODUCTOS </h2>
+<div class="recuadro_principal  container">
+    <h1> Ver Lista de Productos</h1>
+    <p> <button (click) = "VerListaProducto()">Ver lista de productos </button> </p>
+    <label *ngIf = "verListaProductos">
+        <table>
+            <tr  *ngFor="let producto of productos">
+                <th class="tabla_productos">{{producto.numeroProducto}}</th>
+                <th class="tabla_productos">{{producto.nombre}} </th>      
+                <th class="tabla_productos">${{producto.precio}}</th>
+            </tr>       
+        </table>
+    </label>
+  </div>
