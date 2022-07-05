@@ -8,7 +8,7 @@ El class se puede utilizar reiteradas veces y en css se inicializa con el .
     align-items: center;
     padding: 20px;
     font-family: "Satisfy", cursive;
-    font-size: 40px;
+    font-size: 60px;
     font-style: oblique;
     font-stretch: extra-expanded;
     color: rgb(255, 255, 255); /* color de la letra*/
@@ -16,35 +16,16 @@ El class se puede utilizar reiteradas veces y en css se inicializa con el .
 
 
 .menu1{
-    color: #00144a;
-    background-color: #3b4152;;
-    padding: 20px;
-    margin-top: 20px;
+    color: rgb(125, 130, 145)e3;
+    background-color: #4d4d52;
+    font-size: 40px;
+    padding: 10px 90px 5px 10px;
+    margin-top: 10px;
     margin-left: -10px;
     margin-right: -10px;
-    margin-bottom: 20px;
-
+    margin-bottom: 10px;
 }
 
-.boton1 {   /* Botones del menu (Menu, Carta, Tragos, Quienes Somos, Contactenos) */
-    font-family: "Satisfy", cursive;
-    font-size: 20px;
-    font-style: oblique;
-    font-stretch: extra-expanded;
-    color: rgb(255, 255, 255); /* color de la letra*/
-    background-color: #2e2c2c; /*FONDO*/
-
-    border-color:#2e2c2c;
-    /*    border: none;*/
-    margin-left: 25px;
-    margin-right: 25px;
-}
-
-
-
-.resaltador:hover{
-    border-bottom-color: red;
-}
 
 
 /*

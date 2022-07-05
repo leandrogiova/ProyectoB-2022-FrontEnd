@@ -1,0 +1,19 @@
+.boton1 {   /* Botones del menu (Menu, Carta, Tragos, Quienes Somos, Contactenos) */
+    font-family: "Satisfy", cursive;
+    font-size: 15px;
+    font-style: oblique;
+    font-stretch: extra-expanded;
+    color: rgb(255, 255, 255); /* color de la letra*/
+    background-color: #2e2c2c; /*FONDO*/
+
+    border-color:#2e2c2c;
+    /*    border: none;*/
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+
+.resaltador:hover{
+    border-bottom-color: red;
+}
