@@ -1,3 +1,8 @@
+.espacio {
+    margin: 100px;
+}
+
+
 .boton1 {   /* Botones del menu (Menu, Carta, Tragos, Quienes Somos, Contactenos) */
     font-family: "Satisfy", cursive;
     font-size: 15px;

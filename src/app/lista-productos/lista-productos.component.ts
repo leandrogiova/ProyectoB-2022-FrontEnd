@@ -30,6 +30,7 @@ export class ListaProductosComponent implements OnInit {
   }
 
   VerListaProducto(): void{
+/*    
     let p1:Producto = {
       id: 1,
       numeroProducto: 10,
@@ -53,7 +54,7 @@ export class ListaProductosComponent implements OnInit {
     this.productos.push(p2);
     this.productos.push(p3);
     console.log(this.productos);
-
+*/
 
     this.verListaProductos = !this.verListaProductos;
     this.productoService.getAllProductos().subscribe(productos => {
