@@ -1,12 +1,101 @@
-<nav>
-    <p>
-        <a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a>
-        <a href="#ir_agregarMesa"><input  class = "boton1 resaltador" type = "button" value = "AgregarMesa"> </a>
-        <a href="#ir_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Cobrar"></a>
-        <a href="#ir_agregarProducto"> <input class = "boton1 resaltador" type = "button" value = "agregarProducto"> </a>
-        <a href="#ir_modificarMesa"><input  class = "boton1 resaltador" type = "button" value = "modificarMesa"></a>
-    </p>
-</nav>
+<div class="container-fluid">
+    <nav>
+        <p>
+            <a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a>
+            <a href="#ir_agregarMesa"><input  class = "boton1 resaltador" type = "button" value = "AgregarMesa"> </a>
+            <a href="#ir_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Cobrar"></a>
+            <a href="#ir_agregarProducto"> <input class = "boton1 resaltador" type = "button" value = "agregarProducto"> </a>
+            <a href="#ir_modificarMesa"><input  class = "boton1 resaltador" type = "button" value = "modificarMesa"></a>
+        </p>
+    </nav>    
+</div>
+
+
+
+<h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
+<div class="container-fluid recuadro_principal">
+    <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" class="form-inline"> </p>   
+        <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
+        <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
+        <p> <label> Productos </label> </p>
+        <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
+            <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
+                {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
+            </option>
+        </select>
+    <input type = "button" value = "AgregarProducto" (click) = "listaDeProductos()">
+    <label *ngFor=" let producto of listaProductos2">
+        <ul>
+            <p>
+                <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
+            </p>
+        </ul>
+    </label>
+    <p> <input type = "button" value = "Enviar" (click) = "enviarServidorProductoAMesa()"> </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
+</h1>
+<h1 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h1>
+<div class = "recuadro_principal container">
+    <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" > </p>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
+                                                                          <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
+    <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
+    <p> <label> Productos </label> </p>
+    <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
+            <li *ngFor = "let producto of productos">
+                {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
+            </li>
+    </select>
+    <p> <input type = "button" value = "Enviar" (click) = "enviarServidorProductoAMesa()"> </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,21 +161,6 @@
 
 
 
-<h1 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h1>
-<div class = "recuadro_principal container">
-    <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" > </p>
-<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
-                                                                          <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
-<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
-    <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
-    <p> <label> Productos </label> </p>
-    <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
-            <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
-                {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
-            </option>
-    </select>
-    <p> <input type = "button" value = "Enviar" (click) = "enviarServidorProductoAMesa()"> </p>
-</div>
 
 
 
@@ -161,7 +235,7 @@
         <input type = "button" value = "AgregarProducto" (click) = "agregarMuchosProductos()">
         
         <div class = "recuadro_secundario">
-            <p *ngFor = "let producto of lista2">
+            <p *ngFor = "let producto of listaProductos2">
                 {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
 
 <!--           
