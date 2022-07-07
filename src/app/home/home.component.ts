@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private servicioProducto: ProductoService,private mesaProductoService: MesaProductoService ,private fb: FormBuilder ) { 
+  constructor(private servicioProducto: ProductoService,private servicioMesaProductos: MesaProductoService ,private fb: FormBuilder ) { 
 
     this.agregarProducto = this.fb.group({
       numeroProducto: '',
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
       this.productos = productos;
     });
 
-    this.mesaProductoService.getMesasAbiertas().subscribe(mesaAbiertas => {
+    this.servicioMesaProductos.getMesasAbiertas().subscribe(mesaAbiertas => {
       this.mesas = mesaAbiertas;
     });
 
@@ -101,7 +101,7 @@ VerOcutalLista(): void{
     * VerMesasAbiertas, se mostraran todas las mesas abiertas
   */
   verMesasAbiertas(): void{
-    this.mesaProductoService.getMesasAbiertas().subscribe(mesaAbiertas => {
+    this.servicioMesaProductos.getMesasAbiertas().subscribe(mesaAbiertas => {
       this.mesas = mesaAbiertas;
     });
   }
@@ -150,17 +150,29 @@ VerOcutalLista(): void{
     }
 */
 enviarServidorProductoAMesa(): void{
-  this.mesaUnica.estado = true;
-  this.mesaUnica.numero_mesa = this.numeroMesa.value;
-  this.mesaUnica.fecha = this.fecha1Mesa.value;
-  this.mesaUnica.formaDePago = "Efectivo";
-  this.mesaUnica.listaProductos = this.listaProductos2;
-  this.mesaUnica.precioTemporal = 0;
-  this.mesaUnica.precioTotal = 0;
+          let milista: Producto[] = [];
+          milista = this.listaProductos2;
+
+
+    this.mesaUnica.numero_mesa = this.numeroMesa.value;
+
+    this.mesaUnica.listaProductos = milista;
+
+    this.mesaUnica.estado = true;
+    this.mesaUnica.fecha = this.fecha1Mesa.value;
+    this.mesaUnica.precioTotal = 0;
+    this.mesaUnica.precioTemporal = 0;
+    this.mesaUnica.formaDePago = "Efectivo";
+    this.mesaUnica.detalle = "";
+    this.mesaUnica.productosCobrados = [];
+
+    
+
 
   console.log("Enviando el objeto:", this.mesaUnica);
   this.mesas.push(this.mesaUnica);
-  this.mesaProductoService.postAbrirMesa(this.mesaUnica);
+  this.servicioMesaProductos.postAbrirMesa(this.mesaUnica);
+
 
   this.mesaUnica = new mesaProductos();
 }
@@ -182,7 +194,7 @@ actualizar(): void{
         if(this.numeroDeProducto.value == this.productos[e].numeroProducto){
           this.mesas[i].listaProductos = [this.productos[e]].concat(this.mesas[i].listaProductos);
           this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.productos[e].precio;
-          this.mesaProductoService.postActualizar(this.mesas[i]);    
+          this.servicioMesaProductos.postActualizar(this.mesas[i]);    
           j = true;
           break;   
         }
@@ -242,7 +254,7 @@ agregarMuchosProductos(): void{
     if(this.numeroMesa.value == this.mesas[i].id){
       for(let e =0; e <= this.productos.length; e++){
         if(this.numeroDeProducto.value == this.productos[e].numeroProducto){
-          this.productos[e].cobrado = false;
+//          this.productos[e].cobrado = false;
           this.listaProductos2.push(this.productos[e]);
           console.log("ACTUALIZADO lista2=", this.listaProductos2);
           break;   
@@ -296,7 +308,7 @@ agregarMuchosProductos(): void{
         for(let e in this.mesas[i].listaProductos){
           this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.mesas[i].listaProductos[e].precio;
         }     
-        this.mesaProductoService.postActualizar(this.mesas[i]);
+        this.servicioMesaProductos.postActualizar(this.mesas[i]);
         console.log("enviando Muchos productos,", this.mesas[i]);
         this.listaProductos2 = [];
         break;

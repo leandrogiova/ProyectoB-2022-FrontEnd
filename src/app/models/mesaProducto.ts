@@ -11,6 +11,7 @@ export class mesaProductos{
     precioTemporal!: number;
     formaDePago!: string;
     detalle!: string;
+    productosCobrados!: Producto[];
 
 /*
     constructor(id: number, numero_mesa:number, listaProductos: Producto[], precioTotal: number ,estado:boolean, fecha:Date, precioTemporal: number, formaDePago: string, detalle: string){
