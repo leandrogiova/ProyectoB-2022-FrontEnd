@@ -12,3 +12,18 @@
         </table>
     </label>
   </div>
+
+
+
+
+
+
+  <div class = "recuadro_principal container">
+    <form [formGroup] = "agregarProducto" (submit) = "enviarProducto()">
+       <h1> Agregar Producto A la Bases de Datos</h1>    
+        <p>Numero de producto: <input type="number" placeholder="numero del producto" formControlName="numeroProducto" /></p>
+        <p>Nombre: <input type="text" placeholder="nombre del producto" formControlName = "nombre" /></p>
+        <p>Precio: <input type="number" placeholder="precio del producto" formControlName = "precio" /></p>
+        <p><input type="submit" value="Enviar Producto" [disabled] = "!agregarProducto.value"/></p>            
+    </form>
+</div>

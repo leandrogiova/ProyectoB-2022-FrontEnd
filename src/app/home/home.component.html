@@ -24,15 +24,18 @@
             </option>
         </select>
     <input type = "button" value = "AgregarProducto" (click) = "listaDeProductos()">
-    <label *ngFor=" let producto of listaProductos2">
-        <ul>
-            <p>
-                <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
-                Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
-            </p>
-        </ul>
-    </label>
-    <p> <input type = "button" value = "Enviar" (click) = "enviarServidorProductoAMesa()"> </p>
+    <div class="recuadro_secundario">
+        <h6> Lista de Productos:</h6>
+        <label *ngFor=" let producto of listaProductos2">
+            <ul>
+                <p>
+                    <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                    Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
+                </p>
+            </ul>
+        </label>
+    </div>
+    <p> <input type = "button" value = "Enviar" (click) = "enviarAlServidorNuevaMesa()"> </p>
 </div>
 
 
@@ -62,25 +65,6 @@
 
 
 
-
-<h1>
-    --------------------------------------------------------------------------------------------------------------------------------------------------------------
-</h1>
-<h1 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h1>
-<div class = "recuadro_principal container">
-    <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" > </p>
-<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
-                                                                          <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
-<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------                    -->
-    <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
-    <p> <label> Productos </label> </p>
-    <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
-            <li *ngFor = "let producto of productos">
-                {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
-            </li>
-    </select>
-    <p> <input type = "button" value = "Enviar" (click) = "enviarServidorProductoAMesa()"> </p>
-</div>
 
 
 

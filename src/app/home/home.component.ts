@@ -110,54 +110,15 @@ VerOcutalLista(): void{
 
 
 
-    /*
-     * FUNCION enviarServidorProductoAMesa
-     *  Levanta una nueva mesa agregando un unico producto, enviando un objeto MesaProdutos a la base de datos.
-  */
 /*
-    enviarServidorProductoAMesa(): void{
-      let numero: number = 0;
-      numero = this.numeroDeProducto.value;  
-      for(let i: number = 0; i <= this.productos.length; i++){
-        if(numero == this.productos[i].numeroProducto){      
-          let milista: Producto[] = [];
-//          this.productos[i].cobrado = false;
-          milista.push(this.productos[i]);
-          this.abrirNuevaMesa.fecha = this.fecha1Mesa.value;
-          this.abrirNuevaMesa.listaProductos = milista;
-//          this.abrirNuevaMesa.productosCobrados = [];
-          this.abrirNuevaMesa.precioTotal = this.productos[i].precio;
-          break;
-        }
-        else{
-          console.log("ERROR - NO SE ENCONTRO EL PRODUCTO QUE SE QUIREE AGREGAR");
-          this.abrirNuevaMesa.fecha = this.fecha1Mesa.value;
-          this.abrirNuevaMesa.precioTotal = 0;
-        }
-      }
-      this.abrirNuevaMesa.estado = true;
-      this.abrirNuevaMesa.numero_mesa = this.numeroMesa.value;
-      this.abrirNuevaMesa.precioTemporal = 0;
-      
-      console.log("Enviando el objeto:", this.abrirNuevaMesa);
-      this.mesas.push(this.abrirNuevaMesa);
-      this.mesaProductoService.postAbrirMesa(this.abrirNuevaMesa);
-
-      //limpio los casilleros
-      this.numeroMesa = new FormControl('');
-      this.fecha1Mesa = new FormControl('');
-      this.numeroDeProducto = new FormControl('');
-    }
+  * FUNCION enviarServidorProductoAMesa
+  * Agrega una mesa a la base de datos.
+  * No recibe ningun argunmento.
+  * No retorna ningun argumento.
 */
-enviarServidorProductoAMesa(): void{
-          let milista: Producto[] = [];
-          milista = this.listaProductos2;
-
-
+enviarAlServidorNuevaMesa(): void{
     this.mesaUnica.numero_mesa = this.numeroMesa.value;
-
-    this.mesaUnica.listaProductos = milista;
-
+    this.mesaUnica.listaProductos = this.listaProductos2;
     this.mesaUnica.estado = true;
     this.mesaUnica.fecha = this.fecha1Mesa.value;
     this.mesaUnica.precioTotal = 0;
@@ -166,14 +127,13 @@ enviarServidorProductoAMesa(): void{
     this.mesaUnica.detalle = "";
     this.mesaUnica.productosCobrados = [];
 
-    
-
-
-  console.log("Enviando el objeto:", this.mesaUnica);
+  
   this.mesas.push(this.mesaUnica);
   this.servicioMesaProductos.postAbrirMesa(this.mesaUnica);
 
-
+  this.numeroMesa = new FormControl;
+  this.fecha1Mesa = new FormControl('');
+  this.listaProductos2 = [];
   this.mesaUnica = new mesaProductos();
 }
 

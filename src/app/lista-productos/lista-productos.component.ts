@@ -1,5 +1,6 @@
 import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Producto } from '../models/producto';
 import { ProductoService } from '../productoService';
 
@@ -10,7 +11,9 @@ import { ProductoService } from '../productoService';
 })
 export class ListaProductosComponent implements OnInit {
 
+
   productos: Producto[];
+  agregarProducto: FormGroup;
 
   verLista: boolean;
   verListaProductos: boolean;
@@ -18,9 +21,16 @@ export class ListaProductosComponent implements OnInit {
 
 
 
-  constructor(private productoService: ProductoService) { 
+  constructor(private productoService: ProductoService, private fb: FormBuilder) { 
     this.productos = []; //estoy inicializando la lista a vacia
     this.verLista = false;
+
+    this.agregarProducto = this.fb.group({
+      numeroProducto: '',
+      nombre: '',
+      precio: '',
+    });
+
     this.verListaProductos = false;
     this.verUnaMesaBool = false;
 
@@ -30,38 +40,32 @@ export class ListaProductosComponent implements OnInit {
   }
 
   VerListaProducto(): void{
-/*    
-    let p1:Producto = {
-      id: 1,
-      numeroProducto: 10,
-      nombre: 'cafe chico', 
-      precio: 100
-    };
-    let p2:Producto = {
-      id: 2,
-      numeroProducto: 20,
-      nombre: 'cafe jarrita', 
-      precio: 200
-    };
-    let p3:Producto = {
-      id: 3,
-      numeroProducto: 30,
-      nombre: 'cafe grande', 
-      precio: 300
-    };
-
-    this.productos.push(p1);
-    this.productos.push(p2);
-    this.productos.push(p3);
-    console.log(this.productos);
-*/
-
     this.verListaProductos = !this.verListaProductos;
     this.productoService.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
-
   }
+
+
+
+
+
+    /*
+     * FUNCION enviarProducto
+     * Agrega un producto a la bases de datos.
+  */
+    enviarProducto():void{
+      this.productoService.postProducto(this.agregarProducto.value);
+      console.log("Agregando el objeto",this.agregarProducto.value, "\nObjeto Agregado a la base de datos");
+  
+      this.agregarProducto = this.fb.group({
+        numeroProducto: '',
+        nombre: '',
+        precio: '',
+      });
+    }
+
+
 
 
 }

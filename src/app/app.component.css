@@ -80,3 +80,26 @@ La clase se puede re utilizar y en css se inicializa con el .
 .letrablanca{
     color: white;
 }
+
+
+
+.recuadro_principal{
+    font-family: 'Courier New', Courier, monospace;
+    border: 8px solid #053b62;
+    width: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px; 
+    align-items: center;
+}
+
+
+.recuadro_secundario{
+    font-family: 'Courier New', Courier, monospace;
+    border: 3px solid #053b62;
+    width: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px; 
+    align-items: center;
+}
