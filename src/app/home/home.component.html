@@ -28,13 +28,18 @@
         <h6> Lista de Productos:</h6>
         <label *ngFor=" let producto of listaProductos2">
             <ul>
-                <p>
-                    <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
-                    Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
-                </p>
+                <li>
+                    <p>
+                        <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                        Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
+                    </p>
+                </li>
             </ul>
         </label>
     </div>
+    <p>
+        <input type="text" class = "casilleroDetalle" placeholder="Detalle de la mesa" [formControl] = "detalleMesa">
+    </p>
     <p> <input type = "button" value = "Enviar" (click) = "enviarAlServidorNuevaMesa()"> </p>
 </div>
 
@@ -99,6 +104,9 @@
                         <ul *ngFor = "let producto of mesaAbiertas.listaProductos">
                             Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}        
                         </ul>
+                        <p>
+                            Detalle : {{mesaAbiertas.detalle }}
+                        </p>
                         <ul>
                             Precio Total de la mesa = {{mesaAbiertas.precioTotal}}        
                         </ul>

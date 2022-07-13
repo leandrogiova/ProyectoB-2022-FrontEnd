@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   agregarProducto: FormGroup;
   numeroMesa: FormControl;
   numeroDeProducto: FormControl;
+  detalleMesa: FormControl;
   fecha1Mesa: FormControl;
   fecha2Mesa: FormControl;
 
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
     this.mesasResumenes = new Array;
     this.productos = new Array;
     this.numeroMesa = new FormControl('');
+    this.detalleMesa = new FormControl('');
     
     this.numeroDeProducto = new FormControl('');
     this.abrirNuevaMesa = new mesaProductos();
@@ -124,17 +126,19 @@ enviarAlServidorNuevaMesa(): void{
     this.mesaUnica.precioTotal = 0;
     this.mesaUnica.precioTemporal = 0;
     this.mesaUnica.formaDePago = "Efectivo";
-    this.mesaUnica.detalle = "";
+    this.mesaUnica.detalle = this.detalleMesa.value;
     this.mesaUnica.productosCobrados = [];
 
   
   this.mesas.push(this.mesaUnica);
   this.servicioMesaProductos.postAbrirMesa(this.mesaUnica);
 
-  this.numeroMesa = new FormControl;
+  this.numeroMesa = new FormControl('');
+  this.numeroDeProducto = new FormControl('');
   this.fecha1Mesa = new FormControl('');
   this.listaProductos2 = [];
   this.mesaUnica = new mesaProductos();
+  this.detalleMesa = new FormControl('');
 }
 
 
