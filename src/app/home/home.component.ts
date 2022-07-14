@@ -188,6 +188,13 @@ listaDeProductos(): void{
   }
 }
 
+
+
+
+
+
+
+
 /*
   * Esta funcion elimina un producto de la lista "productoLista2"
   * El array listaProducto2 es un array para guardar los distintos productos a guardar en una mesa

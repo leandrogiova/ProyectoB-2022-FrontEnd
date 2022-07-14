@@ -10,7 +10,25 @@
     </nav>    
 </div>
 
+<h1>
+    observacion:
+</h1>
+    <p class="recuadro_principal recuadro_secundario"> 
+        Voy a tener 4 listas De Productos
+        1 para abrir una nueva Mesa
+        2 para ver las mesas abiertas
+        3 para cobrar
+        4 para editar mesas
 
+    </p>
+    <p>
+        Yo voy a necesitar una funcion que reciba una lista de productos en particular
+        y devuelva una lista en particular
+        Esa lista que retornar verla
+        Y el boton para eliminar un producto de esa Lista
+        Esa funcion para eliminar un solo producto tiene que recibir esa lista y retornar otra lista sin 
+        ese elemento     
+    </p>
 
 <h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
 <div class="container-fluid recuadro_principal">
@@ -42,6 +60,123 @@
     </p>
     <p> <input type = "button" value = "Enviar" (click) = "enviarAlServidorNuevaMesa()"> </p>
 </div>
+
+
+
+
+
+
+
+
+
+<div class = "recuadro_principal" >
+    <h2> Agregar Productos a una Mesa </h2>
+    <p>
+        <label> Mesas</label>
+        <select [formControl] = "numeroMesa" >      
+            <option *ngFor = "let mesa of mesas" value={{mesa.numero_mesa}}> 
+                Numero de la mesa "{{mesa.numero_mesa}}"
+            </option>
+      </select>
+    </p>
+
+    <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
+        <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
+            {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
+        </option>
+    </select>
+    <input type = "button" value = "AgregarProducto" (click) = "listaDeProductos()">
+    <div class="recuadro_secundario">
+        <h6> Lista de Productos:</h6>
+        <label *ngFor=" let producto of listaProductos2">
+            <ul>
+                <li>
+                    <p>
+                        <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                        Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
+                    </p>
+                </li>
+            </ul>
+        </label>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
