@@ -32,13 +32,15 @@ export class HomeComponent implements OnInit {
   listaProductos1: Producto[];  // se usa para la funcion, agregar un producto a la mesa
   listaProductos2: Producto[];
 
-  falta modificar la funcion entera de ver las mesas abiertas
+//  falta modificar la funcion entera de ver las mesas abiertas
 
-  chequear que las funciones crear mesa nueva y agregar productos funcione correctamente
+//  chequear que las funciones crear mesa nueva y agregar productos funcione correctamente
 
-  la variable listaProdductos2 NO esta en uso
+//  la variable listaProdductos2 NO esta en uso
 
-  falta comentar el codigo y limpiarlo!
+//  falta comentar el codigo y limpiarlo!
+//--------------------------------------------------
+falta revisar toda la funcion cobrar entera
 
 
   verLista: boolean;
@@ -141,6 +143,10 @@ enviarAlServidorNuevaMesa(): void{
     this.mesaUnica.detalle = this.detalleMesa.value;
     this.mesaUnica.productosCobrados = [];
 
+    for(let e in this.mesaUnica.listaProductos){
+      this.mesaUnica.precioTotal = this.mesaUnica.precioTotal + this.mesaUnica.listaProductos[e].precio;
+    }
+
   
   this.mesas.push(this.mesaUnica);
   this.servicioMesaProductos.postAbrirMesa(this.mesaUnica);
@@ -172,7 +178,7 @@ actualizar(): void{
           this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.productos[e].precio;
           this.servicioMesaProductos.postActualizar(this.mesas[i]);    
           j = true;
-          break;   
+          break;
         }
       }
     }
@@ -338,10 +344,78 @@ agregarMuchosProductos(): void{
 
 
 
+verUnaMesa(): void{
+  this.verUnaMesaBool = !this.verUnaMesaBool;
+  for(let i: number = 0; i <= this.mesas.length; i++){
+    if(this.numeroMesa.value == this.mesas[i].numero_mesa){
+      this.mesaUnica = this.mesas[i];
+      break;
+    }
+  }
+  console.log("MesaUnica = ", this.mesaUnica);
+}
 
 
 
 
+
+cobrarProducto($event: any): void{
+  console.log("\nFuncion cobrarProducto");
+  for(let i: number = 0; i <= this.mesaUnica.listaProductos.length; i++){
+    if($event.target.value == this.mesaUnica.listaProductos[i].id){
+      this.mesaUnica.productosCobrados.push(this.mesaUnica.listaProductos[i]);
+      this.mesaUnica.precioTemporal = this.mesaUnica.precioTemporal + this.mesaUnica.listaProductos[i].precio;
+      this.mesaUnica.listaProductos.splice(i, 1);
+      console.log("--COBRAR--this.MesaUnica = ", this.mesaUnica);
+      this.servicioMesaProductos.postActualizar(this.mesaUnica);
+      break;
+    }
+  }
+}
+
+
+
+
+
+
+
+deshacerCambioCobrarProducto($event: any){
+  console.log("\nFuncion deshacerCambioCobrarProducto");
+  for(let i: number = 0; i <= this.mesaUnica.productosCobrados.length; i++){
+    if($event.target.value == this.mesaUnica.productosCobrados[i].id){
+        this.mesaUnica.listaProductos.push(this.mesaUnica.productosCobrados[i]);
+        this.mesaUnica.precioTemporal = this.mesaUnica.precioTemporal - this.mesaUnica.listaProductos[i].precio;
+        this.mesaUnica.productosCobrados.splice(i, 1);
+
+      console.log("--DESHACER--this.MesaUnica = ", this.mesaUnica);
+      this.servicioMesaProductos.postActualizar(this.mesaUnica);
+      break;
+    }
+  }
+}
+
+
+
+actualizarMesaModificada(): void{
+
+  for(let i: number =0; i <= this.mesas.length; i++){
+    if(this.mesas[i].id == this.mesaUnica.id){
+      this.mesas[i].estado = false;
+      this.mesas[i].precioTemporal = 0;
+//      this.mesas[i].listaProductos = [this.productos[e]].concat(this.mesas[i].listaProductos);
+      this.mesas[i].listaProductos = this.mesas[i].listaProductos.concat(this.mesas[i].productosCobrados);
+//      this.mesas[i].listaProductos = [this.mesas[i].listaProductos.concat(this.mesas[i].productosCobrados)]
+      this.mesas[i].productosCobrados = [];
+      console.log("\nthis.mesas[i] = ", this.mesas[i]);
+      this.servicioMesaProductos.postActualizar(this.mesas[i]);
+      this.mesaUnica = new mesaProductos();
+      this.mesas.splice(i, 1);
+      break;
+    }
+  }
+
+  console.log("Se actualizo la base de datos correctamente");
+}
 
 
 }
