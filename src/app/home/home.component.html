@@ -32,23 +32,24 @@
 
 <h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
 <div class="container-fluid recuadro_principal">
+    <h4>Mesa:</h4>
     <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" class="form-inline"> </p>   
         <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
         <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
-        <p> <label> Productos </label> </p>
+        <h4> Productos: </h4>
         <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
             <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
                 {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
             </option>
         </select>
-    <input type = "button" value = "AgregarProducto" (click) = "listaDeProductos()">
+    <input type = "button" value = "Agregar Producto" (click) = "listaProductos = AgregarProductoaLaListaDeProductos(listaProductos)">
     <div class="recuadro_secundario">
         <h6> Lista de Productos:</h6>
-        <label *ngFor=" let producto of listaProductos2">
+        <label *ngFor=" let producto of listaProductos">
             <ul>
                 <li>
                     <p>
-                        <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                        <button value="{{producto.id}}" (click)="listaProductos = eliminarProductoListaProducto(listaProductos, $event)"> Eliminar </button>
                         Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
                     </p>
                 </li>
@@ -71,34 +72,35 @@
 
 <div class = "recuadro_principal" >
     <h2> Agregar Productos a una Mesa </h2>
+    <h4> Mesas</h4>
     <p>
-        <label> Mesas</label>
         <select [formControl] = "numeroMesa" >      
-            <option *ngFor = "let mesa of mesas" value={{mesa.numero_mesa}}> 
+<!--        <option *ngFor = "let mesa of mesas" value={{mesa.numero_mesa}}>   -->
+            <option *ngFor = "let mesa of mesas" value={{mesa.id}}> 
                 Numero de la mesa "{{mesa.numero_mesa}}"
             </option>
       </select>
     </p>
-
     <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
         <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
             {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
         </option>
     </select>
-    <input type = "button" value = "AgregarProducto" (click) = "listaDeProductos()">
+    <input type = "button" value = "AgregarProducto" (click)= "listaProductos1 = AgregarProductoaLaListaDeProductos(listaProductos1)">
     <div class="recuadro_secundario">
         <h6> Lista de Productos:</h6>
-        <label *ngFor=" let producto of listaProductos2">
+        <label *ngFor=" let producto of listaProductos1">
             <ul>
                 <li>
                     <p>
-                        <button value="{{producto.id}}" (click)="eliminarProductoListaProducto2($event)"> Eliminar </button>
+                        <button value="{{producto.id}}" (click)="listaProductos1 = eliminarProductoListaProducto(listaProductos1, $event)"> Eliminar </button>
                         Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
                     </p>
                 </li>
             </ul>
         </label>
     </div>
+    <input type = "button" value = "Agregar Productos a la Mesa" (click)= "enviandoMuchosProductos()">
 </div>
 
 

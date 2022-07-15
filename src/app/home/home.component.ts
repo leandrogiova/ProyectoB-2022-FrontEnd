@@ -28,7 +28,18 @@ export class HomeComponent implements OnInit {
 
   abrirNuevaMesa: mesaProductos;
   productosAgregar: number[];
+  listaProductos: Producto[];   // se usa para crear una nueva mesa
+  listaProductos1: Producto[];  // se usa para la funcion, agregar un producto a la mesa
   listaProductos2: Producto[];
+
+  falta modificar la funcion entera de ver las mesas abiertas
+
+  chequear que las funciones crear mesa nueva y agregar productos funcione correctamente
+
+  la variable listaProdductos2 NO esta en uso
+
+  falta comentar el codigo y limpiarlo!
+
 
   verLista: boolean;
   verListaProductos: boolean;
@@ -61,6 +72,8 @@ export class HomeComponent implements OnInit {
     this.verUnaMesaBool = false;
 
     this.productosAgregar = [];
+    this.listaProductos = [];
+    this.listaProductos1 = [];  
     this.listaProductos2 = [];
     this.mesaUnica = new mesaProductos();
 
@@ -93,7 +106,6 @@ VerOcutalLista(): void{
     this.verLista = true;
     this.verOcultar = "Ocultar"
   }
-  console.log("verLIsta= ", this.verLista);
 }
 
 
@@ -120,7 +132,7 @@ VerOcutalLista(): void{
 */
 enviarAlServidorNuevaMesa(): void{
     this.mesaUnica.numero_mesa = this.numeroMesa.value;
-    this.mesaUnica.listaProductos = this.listaProductos2;
+    this.mesaUnica.listaProductos = this.listaProductos;
     this.mesaUnica.estado = true;
     this.mesaUnica.fecha = this.fecha1Mesa.value;
     this.mesaUnica.precioTotal = 0;
@@ -136,7 +148,7 @@ enviarAlServidorNuevaMesa(): void{
   this.numeroMesa = new FormControl('');
   this.numeroDeProducto = new FormControl('');
   this.fecha1Mesa = new FormControl('');
-  this.listaProductos2 = [];
+  this.listaProductos = [];
   this.mesaUnica = new mesaProductos();
   this.detalleMesa = new FormControl('');
 }
@@ -175,7 +187,7 @@ actualizar(): void{
 
 
 /*
-*/
+
 listaDeProductos(): void{
   for(let e =0; e <= this.productos.length; e++){
     if(this.numeroDeProducto.value == this.productos[e].numeroProducto){
@@ -187,6 +199,90 @@ listaDeProductos(): void{
 
   }
 }
+*/
+
+
+
+/*
+*/
+AgregarProductoaLaListaDeProductos(listaProductos_: Producto[]): Producto[]{
+  for(let e =0; e <= this.productos.length; e++){
+    if(this.numeroDeProducto.value == this.productos[e].numeroProducto){
+      listaProductos_.push(this.productos[e]);
+      console.log("ACTUALIZADO lista2=", listaProductos_);
+      break;
+    }
+  }
+
+  return listaProductos_;
+}
+
+
+
+
+/*
+  * Esta funcion elimina un producto de la lista "productoLista2"
+  * El array listaProducto2 es un array para guardar los distintos productos a guardar en una mesa
+  * Luego ese array va a ser la lista de productos de una mesa
+  * La funcion recibe como parametro el numero de id del producto
+  * No retorna nada, actualiza el array listaProductos2
+*/
+eliminarProductoListaProducto(listaProductos_: Producto[], _$event: any): Producto[] {
+//  console.log("$event", _$event.target.value, "\nlistaProducto2=", this.listaProductos2);
+  for(let e =0; e <= listaProductos_.length; e++){
+//    console.log("\n\nif", this.numeroDeProducto.value, " == ", this.productos[e].id);
+    if(_$event.target.value == listaProductos_[e].id){
+      listaProductos_.splice(0,1);
+      break;
+    }
+  }
+  console.log("listaProductos_: ", listaProductos_);
+  return listaProductos_;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
+  */
+  enviandoMuchosProductos(): void{
+    for(let i in this.mesas){
+      if(this.numeroMesa.value == this.mesas[i].id){
+        this.mesas[i].listaProductos = this.listaProductos1.concat(this.mesas[i].listaProductos);
+        this.mesas[i].precioTotal = 0;
+        for(let e in this.mesas[i].listaProductos){
+          this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.mesas[i].listaProductos[e].precio;
+        }     
+        this.servicioMesaProductos.postActualizar(this.mesas[i]);
+        console.log("enviando Muchos productos,", this.mesas[i]);
+        break;
+      } 
+    }
+    this.listaProductos1 = [];
+    this.numeroMesa = new FormControl('');
+    this.numeroDeProducto = new FormControl('');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -241,50 +337,11 @@ agregarMuchosProductos(): void{
 
 
 
-    /*
-
-    VER EL PARAMETRO QUE TOMA LA FUNCION
-  */
-    eliminarProductoDeLaLista2($event: { target: { value: number; }; }){
-      console.log("El producto a eliminar es: ", $event.target.value);
-  
-      for(let i: number =0; i <= this.listaProductos2.length; i++){
-  
-        if($event.target.value == this.listaProductos2[i].numeroProducto){
-          console.log("\n\n1--lista2 = ", this.listaProductos2, "\n\nobjeto A eliminar = ", this.listaProductos2[i], "\n\ni = ", i);
-          this.listaProductos2.splice(i, 1);
-  
-          console.log("\n\n2--lista2 = ", this.listaProductos2);
-          break;
-        }
-      }
-  
-    }
-
-
-    
 
 
 
 
 
 
-    /*
-  */
-  enviandoMuchosProductos(): void{
-    for(let i in this.mesas){
-      if(this.numeroMesa.value == this.mesas[i].id){
-        this.mesas[i].listaProductos = this.listaProductos2.concat(this.mesas[i].listaProductos);
-        this.mesas[i].precioTotal = 0;
-        for(let e in this.mesas[i].listaProductos){
-          this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.mesas[i].listaProductos[e].precio;
-        }     
-        this.servicioMesaProductos.postActualizar(this.mesas[i]);
-        console.log("enviando Muchos productos,", this.mesas[i]);
-        this.listaProductos2 = [];
-        break;
-      } 
-    }
-  }
 
 }
