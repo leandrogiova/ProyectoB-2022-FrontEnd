@@ -13,23 +13,6 @@
 <h1>
     observacion:
 </h1>
-    <p class="recuadro_principal recuadro_secundario"> 
-        Voy a tener 4 listas De Productos
-        1 para abrir una nueva Mesa
-        2 para ver las mesas abiertas
-        3 para cobrar
-        4 para editar mesas
-
-    </p>
-    <p>
-        Yo voy a necesitar una funcion que reciba una lista de productos en particular
-        y devuelva una lista en particular
-        Esa lista que retornar verla
-        Y el boton para eliminar un producto de esa Lista
-        Esa funcion para eliminar un solo producto tiene que recibir esa lista y retornar otra lista sin 
-        ese elemento     
-    </p>
-
 <h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
 <div class="container-fluid recuadro_principal">
     <h4>Mesa:</h4>
@@ -61,10 +44,6 @@
     </p>
     <p> <input type = "button" value = "Enviar" (click) = "enviarAlServidorNuevaMesa()"> </p>
 </div>
-
-
-
-
 
 
 
@@ -105,131 +84,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <h1 id = "ir_verMesas"> Ver Mesas </h1>
     <div class="recuadro_principal container"> 
         <p> <button (click) = "VerOcutalLista()"> {{verOcultar}} </button> </p>
-    
+
         <label *ngIf = "verLista">
            <p> <input type = "button" (click) = "verMesasAbiertas()" value = "Actualizar"> </p>
             <div class = "small">
@@ -256,82 +114,7 @@
                     </li>   
             </div>
         </label>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
 <div class = "recuadro_principal container">
