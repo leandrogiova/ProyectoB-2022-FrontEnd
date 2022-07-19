@@ -3,16 +3,13 @@
         <p>
             <a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a>
             <a href="#ir_agregarMesa"><input  class = "boton1 resaltador" type = "button" value = "AgregarMesa"> </a>
-            <a href="#ir_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Cobrar"></a>
+            <a href="#ir_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Ver - Cobrar"></a>
             <a href="#ir_agregarProducto"> <input class = "boton1 resaltador" type = "button" value = "agregarProducto"> </a>
             <a href="#ir_modificarMesa"><input  class = "boton1 resaltador" type = "button" value = "modificarMesa"></a>
         </p>
     </nav>    
 </div>
 
-<h1>
-    observacion:
-</h1>
 <h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
 <div class="container-fluid recuadro_principal">
     <h4>Mesa:</h4>
@@ -71,10 +68,8 @@
         <label *ngFor=" let producto of listaProductos1">
             <ul>
                 <li>
-                    <p>
-                        <button value="{{producto.id}}" (click)="listaProductos1 = eliminarProductoListaProducto(listaProductos1, $event)"> Eliminar </button>
-                        Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
-                    </p>
+                    <button value="{{producto.id}}" (click)="listaProductos1 = eliminarProductoListaProducto(listaProductos1, $event)"> Eliminar </button>  
+                    Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}   
                 </li>
             </ul>
         </label>
@@ -84,41 +79,10 @@
 
 
 
-<h1 id = "ir_verMesas"> Ver Mesas </h1>
-    <div class="recuadro_principal container"> 
-        <p> <button (click) = "VerOcutalLista()"> {{verOcultar}} </button> </p>
-
-        <label *ngIf = "verLista">
-           <p> <input type = "button" (click) = "verMesasAbiertas()" value = "Actualizar"> </p>
-            <div class = "small">
-                <li *ngFor = "let mesaAbiertas of mesas, let i=index" class="recuadro_secundario" >     
-                        <ul> Numero de mesa: {{mesaAbiertas.numero_mesa}} </ul>
-                        <ul> Estado: {{mesaAbiertas.estado}}</ul>
-                        <ul>Fecha: {{mesaAbiertas.fecha}}</ul>
-                        <p> Lista de Productos: </p>
-                        <ul *ngFor = "let producto of mesaAbiertas.listaProductos">
-                            Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}        
-                        </ul>
-                        <p>
-                            Detalle : {{mesaAbiertas.detalle }}
-                        </p>
-                        <ul>
-                            Precio Total de la mesa = {{mesaAbiertas.precioTotal}}        
-                        </ul>
-                        <ul>
-                            Ya abonado de la mesa = {{mesaAbiertas.precioTemporal}}        
-                        </ul>
-                        <ul>
-                            Precio Total de la mesa = {{mesaAbiertas.precioTotal - mesaAbiertas.precioTemporal}}
-                        </ul>
-                    </li>   
-            </div>
-        </label>
-</div>
 
 
 <div class = "recuadro_principal container">
-    <h2 id = "ir_cobrar"> Cerrar </h2>
+    <h2 id = "ir_cobrar"> Ver una mesa </h2>
     <h4>Cobrar un producto o una Mesa</h4>
     <select [formControl] = "numeroMesa" >      
         <option *ngFor = "let mesa of mesas" value={{mesa.numero_mesa}}> 
@@ -126,9 +90,10 @@
         </option>
     </select>
     <button (click)="verUnaMesa()"> Ver/Ocultar Mesa </button>
-
+    <p *ngIf="verUnaMesaBool">
+        Detalle de la mesa: {{mesaUnica.detalle}}
+    </p>
     <div class="recuadro_secundario" *ngIf="verUnaMesaBool" >
-     
         <div class="recuadro_secundario small">
             <h6> Productos sin cobrar: </h6>
             <label *ngFor = "let producto of mesaUnica.listaProductos" > 
@@ -146,9 +111,7 @@
                     <button value="{{producto.id}}" (click)="deshacerCambioCobrarProducto($event)" [disabled]=""> Deshacer cambio </button>
                 </ul>
             </label>
-        </div>
-
-        
+        </div>      
         <ul>
             Precio Total de la mesa = {{mesaUnica.precioTotal}}        
         </ul>
@@ -159,11 +122,8 @@
             Resta abonar total de la mesa = {{mesaUnica.precioTotal - mesaUnica.precioTemporal}}
         </ul>
     </div>
-    <p> <button (click)="actualizarMesaModificada()" [disabled]="verUnaMesaBool == false"> Cobrar y Cerrar una mesa </button> </p>
+    <p> <button (click)="cobrarCerrarMesa()" [disabled]="verUnaMesaBool == false"> Cobrar y Cerrar la mesa </button> </p>
 </div>
-
-
-
 
 
 

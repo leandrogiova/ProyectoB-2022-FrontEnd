@@ -249,18 +249,20 @@ verUnaMesa(): void{
 
 
 /*
-  * Falta revisar esta funcion
-  * Cobra un producto
-y hace un post
+  * cobrarProducto cobra un producto agregando ese producto la lista "productosCobrados" de la mesa
+  * El producto es pasado por parametro de la funcion
+  * Ademas elimina el producto de la lista "listaProductos" de la mesa
+  * Suma el precio del producto al precio temporal de la mesa, es decir, este es el precio ya pagado de la mesa
+  * Envia la mesa al servidor para hacer una actualizacion de la base de datos
+  * Recibe como pametro el numero del id del producto
+  * No retorna ningun argumento
 */
 cobrarProducto($event: any): void{
-  console.log("\nFuncion cobrarProducto");
   for(let i: number = 0; i <= this.mesaUnica.listaProductos.length; i++){
     if($event.target.value == this.mesaUnica.listaProductos[i].id){
       this.mesaUnica.productosCobrados.push(this.mesaUnica.listaProductos[i]);
       this.mesaUnica.precioTemporal = this.mesaUnica.precioTemporal + this.mesaUnica.listaProductos[i].precio;
       this.mesaUnica.listaProductos.splice(i, 1);
-      console.log("--COBRAR--this.MesaUnica = ", this.mesaUnica);
       this.servicioMesaProductos.postActualizar(this.mesaUnica);
       break;
     }
@@ -271,16 +273,20 @@ cobrarProducto($event: any): void{
 
 
 /*
-  * Falta revisar esta funcion
+  * deshacerCambioCobrarProducto elimina un producto de la lista "productosCobrados" de la mesa
+  * El producto es pasado por parametro de la funcion
+  * Ademas agrega el producto a la lista "listaProductos" de la mesa
+  * Resta el precio del producto al precio temporal de la mesa
+  * Envia la mesa al servidor para hacer una actualizacion de la base de datos
+  * Recibe como pametro el numero del id del producto
+  * No retorna ningun argumento
 */
 deshacerCambioCobrarProducto($event: any){
-  console.log("\nFuncion deshacerCambioCobrarProducto");
   for(let i: number = 0; i <= this.mesaUnica.productosCobrados.length; i++){
     if($event.target.value == this.mesaUnica.productosCobrados[i].id){
-        this.mesaUnica.listaProductos.push(this.mesaUnica.productosCobrados[i]);
-        this.mesaUnica.precioTemporal = this.mesaUnica.precioTemporal - this.mesaUnica.listaProductos[i].precio;
-        this.mesaUnica.productosCobrados.splice(i, 1);
-      console.log("--DESHACER--this.MesaUnica = ", this.mesaUnica);
+      this.mesaUnica.listaProductos.push(this.mesaUnica.productosCobrados[i]);
+      this.mesaUnica.precioTemporal = this.mesaUnica.precioTemporal - this.mesaUnica.listaProductos[i].precio;
+      this.mesaUnica.productosCobrados.splice(i, 1);
       this.servicioMesaProductos.postActualizar(this.mesaUnica);
       break;
     }
@@ -289,9 +295,13 @@ deshacerCambioCobrarProducto($event: any){
 
 
 /*
-  * Falta revisar esta funcion
+  * cobrarCerrarMesa cierra una mesa, poniendo el estado de la mesa en false
+  * Luego envia la mesa al servidor para actualizar el servidor
+  * Y eliminar la mesa de la lista de mesas abiertas "mesas"
+  * No recibe ningun parametro 
+  * No retorna nada.
 */
-actualizarMesaModificada(): void{
+cobrarCerrarMesa(): void{
   for(let i: number =0; i <= this.mesas.length; i++){
     if(this.mesas[i].id == this.mesaUnica.id){
       this.mesas[i].estado = false;
@@ -300,139 +310,14 @@ actualizarMesaModificada(): void{
       this.mesas[i].listaProductos = this.mesas[i].listaProductos.concat(this.mesas[i].productosCobrados);
   //  this.mesas[i].listaProductos = [this.mesas[i].listaProductos.concat(this.mesas[i].productosCobrados)]
       this.mesas[i].productosCobrados = [];
-      console.log("\nthis.mesas[i] = ", this.mesas[i]);
       this.servicioMesaProductos.postActualizar(this.mesas[i]);
       this.mesaUnica = new mesaProductos();
+      console.log("\nthis.mesas[i] = ", this.mesas[i]);
       this.mesas.splice(i, 1);
       break;
     }
   }
-  console.log("Se actualizo la base de datos correctamente");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
-*/
-
-
-
-/*
-  * Funcion actualizar
-  * Esta funcion agrega un producto a la mesa.
-  * La variable j, ayuda a utilizar el break para parar el bucle
-*/
-actualizar(): void{
-  let j: boolean = false;                
-  for(let i: number = 0; i <= this.mesas.length; i++){
-    if(this.numeroMesa.value == this.mesas[i].numero_mesa){
-      for(let e: number = 0; e <= this.productos.length; e++){
-        if(this.numeroDeProducto.value == this.productos[e].numeroProducto){
-          this.mesas[i].listaProductos = [this.productos[e]].concat(this.mesas[i].listaProductos);
-          this.mesas[i].precioTotal = this.mesas[i].precioTotal + this.productos[e].precio;
-          this.servicioMesaProductos.postActualizar(this.mesas[i]);    
-          j = true;
-          break;
-        }
-      }
-    }
-    if(j == true){
-      break;
-    }
-  }
-  this.numeroMesa = new FormControl('');
-  this.numeroDeProducto = new FormControl('');
-}
-
-
-
-
-
-
-
 
 
 
